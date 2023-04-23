@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <style>
+            #sample-row{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="addData()">Add Data</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="sample-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script>
+            function addData() {
+                const arr = [
+                    {name: 'name one', email:'email one', address: 'address one'},
+                    {name: 'name two', email:'email two', address: 'address two'},
+                    {name: 'name three', email:'email three', address: 'address three'}
+                ];
+
+                const sampleRow = document.getElementById('sample-row');
+                const tableElem = sampleRow.closest('tbody');
+                arr.forEach(item => {
+                    let trElem =sampleRow.cloneNode(true);
+                    trElem.removeAttribute('id');
+                    trElem.cells[0].innerText = item.name;
+                    trElem.cells[1].innerText = item.email;
+                    trElem.cells[2].innerText = item.address;
+                    tableElem.appendChild(trElem);
+                });
+            }
+        </script>
+    </body>
+</html>

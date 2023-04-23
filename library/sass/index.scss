@@ -1,0 +1,27 @@
+@use 'bg-color';
+
+$color : green;
+
+@mixin addBorder($size, $color){
+    border : $size+px solid $color
+}
+
+body {
+    color: $color;
+
+    p {
+        font-style: italic;
+    }
+
+    .test{
+        @include addBorder(1, blue);
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.btn-danger{
+    @extend .bg-red;
+    border: none;
+    cursor: pointer;
+}

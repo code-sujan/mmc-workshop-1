@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <title>Course</title>
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        #sample-row {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="createTable()">Create table</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone No</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="sample-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <button class="btn" style="background-color: red;" onclick="deleteRow(event)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function deleteRow(e){
+            if(!confirm("Are you sure you want to delete")) return;
+            let elem = e.target
+            let rowElem = elem.closest('tr');
+            let tbodyElem = rowElem.closest('tbody');
+            tbodyElem.removeChild(rowElem);
+        }
+
+
+        function createTable() {
+                const sampleRow = document.getElementById('sample-row');
+                let tbodyElem = sampleRow.closest('tbody');
+                const arr = [
+                    {id:1, name: "name 1", address: "address 1", email: "email 1", amount: "9800000" },
+                    {id:2, name: "name 2", address: "address 2", email: "email 2", amount: "9800000" },
+                    {id:3, name: "name 3", address: "address 3", email: "email 3", amount: "9800000" },
+                    {id:4, name: "name 4", address: "address 4", email: "email 4", amount: "9800000" }
+                ];
+
+
+                arr.forEach((item, index) => {
+                    let trElem = sampleRow.cloneNode(true);
+                    trElem.removeAttribute('id');
+                    trElem.dataset.id = index;
+                    trElem.cells[0].innerText = item.name;
+                    tbodyElem.appendChild(trElem);
+                })
+                
+            }
+    </script>
+</body>
+
+</html>

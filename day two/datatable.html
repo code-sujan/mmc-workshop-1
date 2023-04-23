@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../library/bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../library/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="../library/css/build/index.css">
+    <style>
+        :root{
+            --bg-color : lightgray;
+        }
+        body{
+                background-color: var(--bg-color);
+            }
+    </style>
+</head>
+
+<body>
+<p>DataTable Examples</p>
+    <div class="container-fluid mt-4 bg-white">
+        <table id="country" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Capital</th>
+                    <th>IsLandLocked</th>
+                    <th>Population</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <script src="../library/jquery.js"></script>
+    <script src="../library/DataTables/datatables.min.js"></script>
+    <script>
+        async function fetchCountries() {
+            try {
+                let url = 'https://restcountries.com/v3.1/all';
+                const res = await fetch(url);
+                if (!res.ok) {
+                    throw Error("Api call failed");
+                }
+                const data = await res.json();
+                return data.slice(0, 20).map(x => ({
+                    "name": x.name.common,
+                    "capital": x.capital[0],
+                    "landLocked": x.landlocked,
+                    "population": x.population
+                }));
+            }
+            catch (e) {
+                alert(e);
+            }
+        }
+
+        async function getCountries() {
+            try {
+                let url = 'https://restcountries.com/v3.1/all';
+                const res = await $.ajax({url});
+                if (!res) {
+                    throw Error("Api call failed");
+                }
+                const options =  res.slice(0, 20).map(x => ({
+                    "name": x.name.common,
+                    "capital": x.capital[0],
+                    "landLocked": x.landlocked,
+                    "population": x.population
+                }));
+                return options;
+            }
+            catch (e) {
+                alert(e);
+            }
+        }
+
+        $(async () => {
+            const data = await getCountries();
+            const table = $('#country').DataTable({
+                paging: false,
+                searching : false,
+                info : false,
+                data: data,
+                order : [[1, 'asc']],
+                columns: [
+                    { data: 'name'},
+                    { data: 'capital' },
+                    { data: 'landLocked' },
+                    { data: 'population' },
+                ]
+            });
+
+            table.on('draw', function () {
+                alert('Table redrawn');
+            });
+        })
+    </script>
+</body>
+
+</html>

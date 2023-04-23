@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../library/dist/css/select2.min.css">
+    <link rel="stylesheet" href="../library/bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="offset-3 col-3">
+            <label for="">PreFetched Options</label>
+            <select name="abc" id="abc" class="form-control">
+
+            </select>
+
+            <div class="mt-5">
+                <label for="">Country</label>
+                <select class="form-control" name="country" id="country" required="false">
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="../library/jquery.js"></script>
+    <script src="../library/dist/js/select2.full.min.js"></script>
+
+    <script>
+        async function getCountries() {
+            try {
+                let url = 'https://restcountries.com/v3.1/all';
+                const res = await fetch(url);
+                if (!res.ok) {
+                    throw Error("Api call failed");
+                }
+                const data = await res.json();
+                const options = data.slice(0, 20).map(x => ({
+                    id: x.name.common,
+                    text: x.name.common
+                }));
+                return options;
+            }
+            catch (e) {
+                alert(e);
+            }
+        }
+
+        $(async () => {
+            const options = await getCountries();
+            $('#abc').select2({
+                data: options
+            });
+
+            $('#country').select2({
+                placeholder: 'Select country',
+                ajax: {
+                    url: function (params) {
+                        return 'https://restcountries.com/v3.1/name/' + params.term;
+                    },
+                    // url : 'https://restcountries.com/v3.1/name',
+                    // data : function(params){
+                    //     return {
+                    //         name : params.term
+                    //     }
+                    // },
+                    processResults: function (data) {
+                        const options = data.map(x => ({
+                            id: x.name.common,
+                            text: x.name.common
+                        }));
+                        return {
+                            results: options
+                        };
+                    }
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

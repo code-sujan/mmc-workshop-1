@@ -1,0 +1,22 @@
+.bg-red, .btn-danger {
+  background-color: red;
+}
+
+body {
+  color: green;
+}
+body p {
+  font-style: italic;
+}
+body .test {
+  border: 1px solid blue;
+  width: 100px;
+  height: 100px;
+}
+
+.btn-danger {
+  border: none;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=index.css.map */

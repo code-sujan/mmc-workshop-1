@@ -1,0 +1,48 @@
+<html>
+
+    <head>
+        <title>Course</title>
+       <link rel="stylesheet" href="style.css">
+       <style>
+        .login-title {
+            width: 100%;
+            text-align: center;
+        }
+        .login-input{
+            padding: 10px;
+        }
+        .btn{
+            background-color: blue;
+            padding: 7px;
+            color: white;
+        }
+       </style>
+    </head>
+ 
+    <body>
+       <div class="login-container">
+        <form action="" class="login-form" id="login">
+            <h1 class="login-title">Login Page</h1>
+            <label for="">Username</label>
+            <input class="login-input" type="text" name="username">
+            <label for="">Password</label>
+            <input class="login-input" type="password" name="password">
+            <button type="submit" class="btn" id="loginBtn">Login</button>
+        </form>
+       </div>
+
+       <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formElem = document.getElementById('login');
+            formElem.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const loginBtn = document.getElementById('loginBtn');
+                loginBtn.innerHTML = 'Login In ...' 
+                let userNameElem = formElem.children['username'];
+                let passwordElem = formElem.children['password'];
+                alert(`UserName: ${userNameElem.value}, Password : ${passwordElem.value}` )
+            })
+        });
+       </script>
+    </body>
+</html>

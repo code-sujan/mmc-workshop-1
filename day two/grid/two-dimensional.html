@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <style>
+        div {
+            border: 2px solid black;
+        }
+
+        .grid-container {
+            border: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 100px 600px 100px;
+            gap: 10px;
+            grid-template-areas:
+                "header header test"
+                "sidebar main main"
+                "footer footer footer";
+        }
+
+        .header {
+            grid-area: header;
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+        }
+
+        .main {
+            grid-area: main;
+        }
+
+        .footer {
+            grid-area: footer;
+        }
+
+        .test {
+            grid-area: test;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-container">
+        <div class="header">Header</div>
+        <div class="test">Ttest</div>
+        <div class="siderbar">SideBar</div>
+        <div class="main">Main</div>
+        <div class="footer">Footer</div>
+    </div>
+</body>
+
+</html>
