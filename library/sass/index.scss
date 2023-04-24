@@ -2,8 +2,8 @@
 
 $color : green;
 
-@mixin addBorder($size, $color){
-    border : $size+px solid $color
+@mixin addBorder($size, $color) {
+    border: $size+px solid $color
 }
 
 body {
@@ -13,14 +13,19 @@ body {
         font-style: italic;
     }
 
-    .test{
+    .test {
         @include addBorder(1, blue);
         width: 100px;
         height: 100px;
     }
 }
 
-.btn-danger{
+.btn-primary {
+    @extend .bg-primary;
+    cursor: pointer;
+}
+
+.btn-danger {
     @extend .bg-red;
     border: none;
     cursor: pointer;

@@ -2,6 +2,10 @@
   background-color: red;
 }
 
+.bg-primary, .btn-primary {
+  background-color: blue;
+}
+
 body {
   color: green;
 }
@@ -12,6 +16,10 @@ body .test {
   border: 1px solid blue;
   width: 100px;
   height: 100px;
+}
+
+.btn-primary {
+  cursor: pointer;
 }
 
 .btn-danger {
